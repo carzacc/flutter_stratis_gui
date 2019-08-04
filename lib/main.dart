@@ -35,12 +35,14 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   TextEditingController _nameController;
   TextEditingController _blockdevController;
+  String version = "Tap the button";
 
   void _createPool() {
-    StratisFlutter.createPool(
-      name: "mypool",
-      blockdevs: ["/dev/example1", "/dev/example2"]
-    );
+    StratisFlutter.createPool(name: "mypool", blockdevs: ["/dev/example1", "/dev/example2"]).then((
+      (result) => setState(() {
+        print(result);
+      })
+    ));
   }
 
   @override
@@ -50,16 +52,8 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            TextField(
-              controller: _nameController,
-            ),
-   /*         TextField(
-              controller: _blockdevController,
-            ),*/
-          ],
+        child: Text(
+          version
         ),
       ),
       floatingActionButton: FloatingActionButton(
